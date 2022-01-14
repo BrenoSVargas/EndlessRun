@@ -14,7 +14,7 @@ public class InGameState : State
         machine.gameIsRunning = false;
 
     }
-    private void Update()
+    public override void UpdateState()
     {
         timeCounter += Time.deltaTime;
 

@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216982981316981792, guid: ce9d0cccebf8b254baf704f3b1c53409, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.05
+      value: -8.11
       objectReference: {fileID: 0}
     - target: {fileID: 5216982981316981792, guid: ce9d0cccebf8b254baf704f3b1c53409, type: 3}
       propertyPath: m_LocalPosition.y
@@ -64,6 +64,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1802674579823543176, guid: efb94b5251675554d8a2bdbfc4310b6a, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2518559430014556992, guid: efb94b5251675554d8a2bdbfc4310b6a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -111,6 +115,14 @@ PrefabInstance:
     - target: {fileID: 2521452881998939814, guid: efb94b5251675554d8a2bdbfc4310b6a, type: 3}
       propertyPath: m_Name
       value: BasicPlatform1WithSmokeObs Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524090346912598633, guid: efb94b5251675554d8a2bdbfc4310b6a, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613795494479342919, guid: efb94b5251675554d8a2bdbfc4310b6a, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efb94b5251675554d8a2bdbfc4310b6a, type: 3}

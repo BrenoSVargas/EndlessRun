@@ -47,6 +47,11 @@ public sealed class StateMachineController : MonoBehaviour
         ChangeTo<MainMenuState>();
     }
 
+    private void Update()
+    {
+        current.UpdateState();
+    }
+
     public void ChangeTo<T>() where T : State
     {
         State state = GetState<T>();
