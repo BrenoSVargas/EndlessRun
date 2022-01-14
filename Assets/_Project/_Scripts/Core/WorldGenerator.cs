@@ -16,24 +16,21 @@ public sealed class WorldGenerator : MonoBehaviour
     {
         _numberOfPlatforms = 20;
         Awake();
+        InitGame();
     }
     private void Awake()
     {
         _instance = this;
+    }
 
+    public void InitGame()
+    {
         _savedPosPlatform = new GameObject("SavedPosPlatform").transform;
 
         _savedPosPlatform.position = new Vector3(0, 0, 0);
         _savedPosPlatform.Rotate(new Vector3(0, 0, 0));
-
-    }
-
-
-    private void Start()
-    {
         GeneratePlatforms();
     }
-
 
     private void GeneratePlatforms()
     {

@@ -17,7 +17,7 @@ public sealed class StateMachineController : MonoBehaviour
     public TMP_Text LoadingText;
 
     [Header("In Game State")]
-    [SerializeField] private float _timeLimit;
+    [SerializeField] private float _timeLimit = 10f;
     [HideInInspector] public float TimeLimit { get { return _timeLimit; } }
 
     public bool gameIsRunning;
@@ -27,6 +27,7 @@ public sealed class StateMachineController : MonoBehaviour
     public void Initialize()
     {
         _busy = false;
+        _timeLimit = 10f;
         Awake();
     }
 

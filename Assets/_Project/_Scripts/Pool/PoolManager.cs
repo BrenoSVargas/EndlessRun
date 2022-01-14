@@ -9,9 +9,18 @@ public sealed class PoolManager : MonoBehaviour
     public List<PoolItem> items;
     public List<GameObject> pooledItems;
 
+    public void Initialize(){
+        Awake();
+        InitGame();
+    }
+
     private void Awake()
     {
         _instance = this;
+    }
+
+    public void InitGame()
+    {
         FillPool();
     }
 

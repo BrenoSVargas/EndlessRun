@@ -10,13 +10,18 @@ public class LoadState : State
 
     public override void Enter()
     {
+
         machine.LoadingScreen.SetActive(true);
+
+        StopAllCoroutines();
 
         StartCoroutine(LoadSequence());
     }
     public override void Exit()
     {
+
         machine.LoadingScreen.SetActive(false);
+        _sceneLoading.Clear();
 
         Time.timeScale = 1f;
     }
@@ -39,10 +44,16 @@ public class LoadState : State
             LoadUpdateUI(percentLoad);
 
         }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)SceneIndexer.GAME));
+
+        yield return new WaitForSeconds(1f);
+
         percentLoad = 50;
         LoadUpdateUI(percentLoad);
+        PoolManager.Instance.InitGame();
+        WorldGenerator.Instance.InitGame();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         percentLoad = 100;
         LoadUpdateUI(percentLoad);
         yield return new WaitForSeconds(0.5f);
@@ -52,9 +63,16 @@ public class LoadState : State
 
     private void LoadUpdateUI(int loadingValue)
     {
-        float percent = (float)loadingValue/100;
-        machine.LoadingBar.value = percent;
-        machine.LoadingText.text = $"Loading...{loadingValue}%";
-
+        if (loadingValue <= 0)
+        {
+            machine.LoadingBar.value = 0f;
+            machine.LoadingText.text = $"Loading...0%";
+        }
+        else
+        {
+            float percent = (float)loadingValue / 100;
+            machine.LoadingBar.value = percent;
+            machine.LoadingText.text = $"Loading...{loadingValue}%";
+        }
     }
 }
