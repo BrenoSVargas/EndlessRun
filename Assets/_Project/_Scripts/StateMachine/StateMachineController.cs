@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public sealed class StateMachineController : MonoBehaviour
 {
@@ -11,7 +11,18 @@ public sealed class StateMachineController : MonoBehaviour
     public State current { get { return _current; } }
     private bool _busy;
 
+    [Header("Loading State")]
+    public GameObject LoadingScreen;
+    public Slider LoadingBar;
+    public TMP_Text LoadingText;
+
+    [Header("In Game State")]
+    [SerializeField] private float _timeLimit;
+    [HideInInspector] public float TimeLimit { get { return _timeLimit; } }
+
     public bool gameIsRunning;
+
+
 
     public void Initialize()
     {
@@ -22,11 +33,17 @@ public sealed class StateMachineController : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        LoadingScreen = GameObject.Find("Loading");
+        LoadingBar = GameObject.Find("LoadingBar").GetComponent<Slider>();
+        LoadingText = GameObject.Find("LoadText").GetComponent<TMP_Text>();
+
+        LoadingScreen.SetActive(false);
     }
 
     private void Start()
     {
-        ChangeTo<InGameState>();
+        ChangeTo<MainMenuState>();
     }
 
     public void ChangeTo<T>() where T : State

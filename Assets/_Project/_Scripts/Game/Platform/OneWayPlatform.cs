@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicPlatform : Platform
+public class OneWayPlatform : Platform
 {
-    public override void Positioner()
+    public override void SetPlatform()
     {
         transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
 

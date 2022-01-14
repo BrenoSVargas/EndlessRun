@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InGameState : State
 {
+    private float timeCounter;
     public override void Enter()
     {
         machine.gameIsRunning = true;
@@ -12,5 +13,16 @@ public class InGameState : State
     {
         machine.gameIsRunning = false;
 
+    }
+    private void Update()
+    {
+        timeCounter += Time.deltaTime;
+
+        if (timeCounter >= machine.TimeLimit)
+        {
+            
+        }
+
+        ScoreManager.Instance.ScorerUpdateEveryFrame();
     }
 }

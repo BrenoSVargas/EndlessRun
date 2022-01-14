@@ -59,6 +59,6 @@ public sealed class WorldGenerator : MonoBehaviour
 
         lastPlatformTransform = platformGO.transform;
 
-        platformGO.GetComponent<Platform>().Positioner();
+        platformGO.GetComponent<Platform>().SetPlatform();
     }
 }
