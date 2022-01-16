@@ -5,28 +5,20 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-    private static CoinManager _instance;
-    public static CoinManager Instance { get { return _instance; } }
-
     private int _coinCounter;
+    [SerializeField] private IntEventChannelSO _coinsCounterEvent = default;
+    [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
 
-    public Action<int> OnCoinsCounterUpdate;
-    public Action<int> OnCoinsChangedValue;
 
-
-    private void Awake()
-    {
-        _instance = this;
-    }
 
     private void Start()
     {
-        OnCoinsCounterUpdate += CoinsCounter;
+        _coinsCounterEvent.OnEventRaised += EventManager_UpdateCoins;
     }
 
-    private void CoinsCounter(int coins)
+    private void EventManager_UpdateCoins(int coins)
     {
-        _coinCounter += coins;        
-        OnCoinsChangedValue?.Invoke(_coinCounter);
+        _coinCounter += coins;
+        _coinsChangedEvent.OnEventRaised(_coinCounter);
     }
 }

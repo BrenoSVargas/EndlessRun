@@ -16,13 +16,13 @@ public class ScoreManager : MonoBehaviour
 
     public float StartSpeedGame = 0.2f;
     public float SmoothScoreCounter = 20f;
-    public float TimeMultiplayerSpeed = 1.5f;
+    public float TimeMultiplayerSpeed = 1.2f;
 
     public void Initialize()
     {
         SmoothScoreCounter = 20f;
         StartSpeedGame = 0.2f;
-        TimeMultiplayerSpeed = 1.5f;
+        TimeMultiplayerSpeed = 1.2f;
         Awake();
     }
 

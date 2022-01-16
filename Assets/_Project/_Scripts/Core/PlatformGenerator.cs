@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class WorldGenerator : MonoBehaviour
+public sealed class PlatformGenerator : PoolManager
 {
-    private static WorldGenerator _instance;
-    public static WorldGenerator Instance { get { return _instance; } }
     [SerializeField] private int _numberOfPlatforms = 20;
+    [SerializeField] private VoidEventChannelSO _newPlatformEvent = default;
 
     private Transform _savedPosPlatform;
-    private Transform lastPlatformTransform;
+    private Transform _lastPlatformTransform;
 
 
-    public void Initialize()
+    public override void Initialize()
     {
         _numberOfPlatforms = 20;
-        Awake();
+    }
+    private void Start()
+    {
+        _newPlatformEvent.OnEventRaised += GeneratePlatform;
         InitGame();
     }
-    private void Awake()
-    {
-        _instance = this;
-    }
 
-    public void InitGame()
+    public override void InitGame()
     {
+        base.InitGame();
+
         _savedPosPlatform = new GameObject("SavedPosPlatform").transform;
 
         _savedPosPlatform.position = new Vector3(0, 0, 0);
@@ -41,20 +41,20 @@ public sealed class WorldGenerator : MonoBehaviour
     }
     public void GeneratePlatform()
     {
-        GameObject platformGO = PoolManager.Instance.GetRandomItem();
+        GameObject platformGO = GetRandomItem();
 
         if (!platformGO) return;
 
         platformGO.SetActive(true);
 
-        if (lastPlatformTransform != null)
+        if (_lastPlatformTransform != null)
         {
-            _savedPosPlatform.transform.position = new Vector3(0, 0, lastPlatformTransform.position.z + platformGO.GetComponent<Platform>().SumPosZ);
+            _savedPosPlatform.transform.position = new Vector3(0, 0, _lastPlatformTransform.position.z + _lastPlatformTransform.GetComponent<Platform>().SumPosZ);
         }
 
         platformGO.transform.position = _savedPosPlatform.position;
 
-        lastPlatformTransform = platformGO.transform;
+        _lastPlatformTransform = platformGO.transform;
 
         platformGO.GetComponent<Platform>().SetPlatform();
     }

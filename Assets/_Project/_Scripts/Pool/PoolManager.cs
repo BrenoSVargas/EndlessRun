@@ -2,29 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class PoolManager : MonoBehaviour
+public abstract class PoolManager : MonoBehaviour
 {
-    private static PoolManager _instance;
-    public static PoolManager Instance => _instance;
     public List<PoolItem> items;
     public List<GameObject> pooledItems;
 
-    public void Initialize(){
-        Awake();
+    public virtual void Initialize()
+    {
         InitGame();
     }
 
-    private void Awake()
-    {
-        _instance = this;
-    }
-
-    public void InitGame()
+    public virtual void InitGame()
     {
         FillPool();
     }
 
-    public GameObject GetRandomItem()
+    protected GameObject GetRandomItem()
     {
         Utils.Shuffle(pooledItems);
 
@@ -50,7 +43,7 @@ public sealed class PoolManager : MonoBehaviour
         return null;
     }
 
-    private void FillPool()
+    protected void FillPool()
     {
         pooledItems = new List<GameObject>();
         foreach (PoolItem item in items)

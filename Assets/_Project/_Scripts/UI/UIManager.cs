@@ -13,6 +13,8 @@ public sealed class UIManager : MonoBehaviour
 
     private TMP_Text _scoreText, _coinsText;
 
+    [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
+
     public void Initialize()
     {
         Awake();
@@ -26,7 +28,7 @@ public sealed class UIManager : MonoBehaviour
     private void Start()
     {
         ScoreManager.Instance.OnScoreUpdate += ScoreManager_UpdateScore;
-        CoinManager.Instance.OnCoinsChangedValue += CoinManager_UpdateCoins;
+        _coinsChangedEvent.OnEventRaised += EventManager_UpdateCoins;
     }
 
 
@@ -76,7 +78,7 @@ public sealed class UIManager : MonoBehaviour
         _scoreText.text = score.ToString("D6");
     }
 
-    private void CoinManager_UpdateCoins(int coin)
+    private void EventManager_UpdateCoins(int coin)
     {
         _coinsText.text = coin.ToString();
     }

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class DeactiveObject : MonoBehaviour
 {
+    [SerializeField] private VoidEventChannelSO _newPlatformEvent = default;
     private void OnTriggerExit(Collider other)
     {
         LimitOfScene limit = other.GetComponent<LimitOfScene>();
-        
-        if (!limit) return;
-        
-        WorldGenerator.Instance.GeneratePlatform();
+
+        if (!limit)
+        {
+            return;
+        }
+
+        _newPlatformEvent.RaiseEvent();
         gameObject.SetActive(false);
     }
 }

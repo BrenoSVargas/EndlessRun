@@ -18,7 +18,7 @@ public class InGameState : State
     {
         timeCounter += Time.deltaTime;
 
-        if (ScoreManager.Instance.SpeedGame < 1.5f && timeCounter >= machine.TimeLimit)
+        if (ScoreManager.Instance.SpeedGame < 1f && timeCounter >= machine.TimeLimit)
         {
             timeCounter = 0;
             ScoreManager.Instance.UpdateSpeedGame();

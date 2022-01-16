@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1802674579823543176}
+  - component: {fileID: 2190001530626049214}
   m_Layer: 0
   m_Name: RoleRight
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 2518559430014556992}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2190001530626049214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150863279321351322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6073f7ec793c50940b47cfab5423ebf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomChance: 3
+  _roles: []
 --- !u!1 &2364368763238847221
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +57,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7524090346912598633}
+  - component: {fileID: 4247737488108501705}
   m_Layer: 0
   m_Name: RoleLeft
   m_TagString: Untagged
@@ -66,6 +82,20 @@ Transform:
   m_Father: {fileID: 2518559430014556992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4247737488108501705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364368763238847221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6073f7ec793c50940b47cfab5423ebf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomChance: 3
+  _roles: []
 --- !u!1 &2521452881998939814
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce3a14a22a194944917c899ca4e8841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _newPlatformEvent: {fileID: 11400000, guid: be71a5c9234fc22459e2834388967792, type: 2}
 --- !u!1 &4493857459502131336
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8613795494479342919}
+  - component: {fileID: 2536571868007003419}
   m_Layer: 0
   m_Name: RoleMiddle
   m_TagString: Untagged
@@ -243,6 +275,20 @@ Transform:
   m_Father: {fileID: 2518559430014556992}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2536571868007003419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493857459502131336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6073f7ec793c50940b47cfab5423ebf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomChance: 3
+  _roles: []
 --- !u!1001 &2302283850465872007
 PrefabInstance:
   m_ObjectHideFlags: 0

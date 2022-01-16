@@ -6,6 +6,8 @@ public class Coin : Item
 {
     public int coinValue = 1;
 
+    [SerializeField] private IntEventChannelSO _coinsCounterEvent = default;
+
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -14,7 +16,7 @@ public class Coin : Item
     protected override void Effect()
     {
         Instantiate(vFXToInstante, transform.position, Quaternion.identity);
-        CoinManager.Instance.OnCoinsCounterUpdate?.Invoke(coinValue);
+        _coinsCounterEvent.RaiseEvent(coinValue);
         
         if (meshRenderer) meshRenderer.enabled = false;
     }
