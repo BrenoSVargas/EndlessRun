@@ -5,21 +5,37 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private Rigidbody _rigidbody;
+    [SerializeField] float _jumpForce = 6f;
 
+    [SerializeField] private VoidEventChannelSO _jumpChannelEvent;
+    [SerializeField] private FloatEventChannelSO _horizontalChannelEvent;
+
+
+    public void Initialize(float jumpForce)
+    {
+        _jumpForce = jumpForce;
+        Awake();
+    }
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
 
     }
-    public void MoveToRole(float xPos)
+
+    private void Start()
+    {
+        _jumpChannelEvent.OnEventRaised += Jump;
+        _horizontalChannelEvent.OnEventRaised += MoveToRole;
+    }
+    private void MoveToRole(float xPos)
     {
         StopAllCoroutines();
         StartCoroutine(MoveTo(xPos));
     }
 
-    public void Jump()
+    private void Jump()
     {
-        _rigidbody.AddForce(Vector3.up * 6f, ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
     IEnumerator MoveTo(float xPos)

@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public event Action<bool> OnGameOver;
+    [SerializeField] private VoidEventChannelSO _isDeadChannelEvent;
+
     private void OnTriggerEnter(Collider other)
     {
         Obstacle obs = other.gameObject.GetComponent<Obstacle>();
         if (!obs) return;
-        GameOver(true);
+        PlayerIsDead();
     }
 
-    private void GameOver(bool isOver)
+    private void PlayerIsDead()
     {
-        StateMachineController.Instance.ChangeTo<GameOverState>();
-        OnGameOver?.Invoke(isOver);
+        _isDeadChannelEvent.RaiseEvent();
     }
 }

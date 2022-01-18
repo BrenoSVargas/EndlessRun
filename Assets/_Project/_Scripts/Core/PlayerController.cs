@@ -10,9 +10,13 @@ public sealed class PlayerController : MonoBehaviour
     private float[] _rolePosX = new float[3];
     private int index = 1;
     private Health _health;
-    private Animator _animator;
     private PlayerInputActions _playerInputActions;
     private Movement _movement;
+
+    [SerializeField] private VoidEventChannelSO _deadChannelEvent;
+    [SerializeField] private VoidEventChannelSO _jumpChannelEvent;
+    [SerializeField] private FloatEventChannelSO _horizontalChannelEvent;
+
 
     public void Initialize(float roleLeft, float roleMid, float roleRight)
     {
@@ -25,19 +29,17 @@ public sealed class PlayerController : MonoBehaviour
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _animator = GetComponent<Animator>();
         _movement = GetComponent<Movement>();
 
         _playerInputActions = new PlayerInputActions();
     }
     private void Start()
     {
-        _health.OnGameOver += Health_GameOver;
+        _deadChannelEvent.OnEventRaised += IsDeadEvent;
     }
     private void Input_Jump(InputAction.CallbackContext context)
     {
-        _animator.SetTrigger(AnimatorParameters.Jump);
-        _movement.Jump();
+        _jumpChannelEvent.RaiseEvent();
     }
 
     private void Input_HorizontalMove(InputAction.CallbackContext context)
@@ -49,16 +51,15 @@ public sealed class PlayerController : MonoBehaviour
         else if (index > 2)
             index = 2;
 
-        _movement.MoveToRole(_rolePosX[index]);
+        _horizontalChannelEvent.RaiseEvent(_rolePosX[index]);
     }
 
-    private void Health_GameOver(bool isOver)
+    private void IsDeadEvent()
     {
-        if (isOver)
-            _animator.SetTrigger(AnimatorParameters.Dead);
+        DisableInputs();
     }
 
-    private void OnEnable()
+    private void EnableInputs()
     {
         _playerInputActions.Player.Jump.performed += Input_Jump;
         _playerInputActions.Player.Jump.Enable();
@@ -67,13 +68,22 @@ public sealed class PlayerController : MonoBehaviour
         _playerInputActions.Player.HorizontalMove.Enable();
     }
 
-
-    private void OnDisable()
+    private void DisableInputs()
     {
         _playerInputActions.Player.Jump.performed -= Input_Jump;
         _playerInputActions.Player.Jump.Disable();
 
         _playerInputActions.Player.HorizontalMove.performed -= Input_HorizontalMove;
         _playerInputActions.Player.HorizontalMove.Disable();
+    }
+
+    private void OnEnable()
+    {
+        EnableInputs();
+    }
+
+    private void OnDisable()
+    {
+        DisableInputs();
     }
 }

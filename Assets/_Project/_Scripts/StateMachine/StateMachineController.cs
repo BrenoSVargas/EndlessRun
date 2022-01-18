@@ -20,6 +20,7 @@ public sealed class StateMachineController : MonoBehaviour
     [SerializeField] private float _timeLimit = 10f;
     [HideInInspector] public float TimeLimit { get { return _timeLimit; } }
 
+
     [Header("Events Game")]
     public VoidEventChannelSO OnInitGameEvent = default;
 
