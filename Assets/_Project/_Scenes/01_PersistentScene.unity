@@ -336,6 +336,7 @@ MonoBehaviour:
   LoadingBar: {fileID: 0}
   LoadingText: {fileID: 0}
   _timeLimit: 10
+  OnInitGameEvent: {fileID: 11400000, guid: f7864445c85684448a7eeeb37e7d088b, type: 2}
   gameIsRunning: 0
 --- !u!4 &298526687
 Transform:

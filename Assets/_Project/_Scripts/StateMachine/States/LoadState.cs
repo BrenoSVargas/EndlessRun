@@ -50,7 +50,8 @@ public class LoadState : State
 
         percentLoad = 50;
         LoadUpdateUI(percentLoad);
-        
+        machine.OnInitGameEvent.RaiseEvent();
+
         yield return new WaitForSeconds(1f);
         percentLoad = 100;
         LoadUpdateUI(percentLoad);

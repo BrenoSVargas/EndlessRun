@@ -7,14 +7,38 @@ public abstract class PoolManager : MonoBehaviour
     public List<PoolItem> items;
     public List<GameObject> pooledItems;
 
-    public virtual void Initialize()
+    public virtual void Initialize(PoolItem[] itemArray)
     {
+        items.AddRange(itemArray);
         InitGame();
     }
 
-    public virtual void InitGame()
+    protected virtual void InitGame()
     {
         FillPool();
+    }
+
+    protected GameObject GetItem()
+    {
+        for (int i = 0; i < pooledItems.Count; i++)
+        {
+            if (!pooledItems[i].activeInHierarchy)
+            {
+                return pooledItems[i];
+            }
+        }
+
+        foreach (PoolItem item in items)
+        {
+            if (item.expendable)
+            {
+                GameObject instantiate = InstantiateAndDesactive(item);
+                pooledItems.Add(instantiate);
+                return instantiate;
+            }
+        }
+        return null;
+
     }
 
     protected GameObject GetRandomItem()
@@ -33,8 +57,7 @@ public abstract class PoolManager : MonoBehaviour
         {
             if (item.expendable)
             {
-                GameObject instantiate = Instantiate(item.prefab);
-                instantiate.SetActive(false);
+                GameObject instantiate = InstantiateAndDesactive(item);
                 pooledItems.Add(instantiate);
                 return instantiate;
             }
@@ -50,10 +73,16 @@ public abstract class PoolManager : MonoBehaviour
         {
             for (int i = 0; i < item.amount; i++)
             {
-                GameObject instantiate = Instantiate(item.prefab);
-                instantiate.SetActive(false);
+                GameObject instantiate = InstantiateAndDesactive(item);
                 pooledItems.Add(instantiate);
             }
         }
+    }
+
+    private GameObject InstantiateAndDesactive(PoolItem item)
+    {
+        GameObject instantiate = Instantiate(item.prefab);
+        instantiate.SetActive(false);
+        return instantiate;
     }
 }

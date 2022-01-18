@@ -7,6 +7,7 @@ public class Coin : Item
     public int coinValue = 1;
 
     [SerializeField] private IntEventChannelSO _coinsCounterEvent = default;
+    [SerializeField] private PosEventChannelSO _coinEffcetsEvent = default;
 
     private void Start()
     {
@@ -15,9 +16,10 @@ public class Coin : Item
 
     protected override void Effect()
     {
-        Instantiate(vFXToInstante, transform.position, Quaternion.identity);
+
         _coinsCounterEvent.RaiseEvent(coinValue);
-        
+        _coinEffcetsEvent.RaiseEvent(transform.position);
+
         if (meshRenderer) meshRenderer.enabled = false;
     }
 

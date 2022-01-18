@@ -6,28 +6,30 @@ public sealed class PlatformGenerator : PoolManager
 {
     [SerializeField] private int _numberOfPlatforms = 20;
     [SerializeField] private VoidEventChannelSO _newPlatformEvent = default;
+    [SerializeField] private VoidEventChannelSO _initGameEvent = default;
 
     private Transform _savedPosPlatform;
     private Transform _lastPlatformTransform;
 
 
-    public override void Initialize()
+    public override void Initialize(PoolItem[] itemArray)
     {
+        base.Initialize(itemArray);
         _numberOfPlatforms = 20;
     }
     private void Start()
     {
         _newPlatformEvent.OnEventRaised += GeneratePlatform;
-        InitGame();
+        _initGameEvent.OnEventRaised += InitGame;
     }
 
-    public override void InitGame()
+    protected override void InitGame()
     {
         base.InitGame();
 
         _savedPosPlatform = new GameObject("SavedPosPlatform").transform;
 
-        _savedPosPlatform.position = new Vector3(0, 0, 0);
+        _savedPosPlatform.position = new Vector3(0, 0, -20);
         _savedPosPlatform.Rotate(new Vector3(0, 0, 0));
         GeneratePlatforms();
     }
@@ -39,7 +41,8 @@ public sealed class PlatformGenerator : PoolManager
             GeneratePlatform();
         }
     }
-    public void GeneratePlatform()
+
+    private void GeneratePlatform()
     {
         GameObject platformGO = GetRandomItem();
 
@@ -49,7 +52,11 @@ public sealed class PlatformGenerator : PoolManager
 
         if (_lastPlatformTransform != null)
         {
-            _savedPosPlatform.transform.position = new Vector3(0, 0, _lastPlatformTransform.position.z + _lastPlatformTransform.GetComponent<Platform>().SumPosZ);
+            _savedPosPlatform.transform.position = new Vector3(0, 0, _lastPlatformTransform.position.z + platformGO.GetComponent<Platform>().SumPosZ);
+        }
+        else
+        {
+            _savedPosPlatform.position = new Vector3(0, 0, _savedPosPlatform.position.z + platformGO.GetComponent<Platform>().SumPosZ);
         }
 
         platformGO.transform.position = _savedPosPlatform.position;

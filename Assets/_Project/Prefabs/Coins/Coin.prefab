@@ -130,6 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDestroy: 0.5
-  vFXToInstante: {fileID: 1851817914418066, guid: 42f7537e057a0cc4680966ec68e03aad, type: 3}
   coinValue: 1
   _coinsCounterEvent: {fileID: 11400000, guid: 406a3c2d51df48e4fb9ecaf9919f0f97, type: 2}
+  _coinEffcetsEvent: {fileID: 11400000, guid: 9eaefd8662a890f4e939fedda7b81d51, type: 2}
