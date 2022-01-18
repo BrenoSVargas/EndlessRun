@@ -33,10 +33,6 @@ public sealed class PlayerController : MonoBehaviour
 
         _playerInputActions = new PlayerInputActions();
     }
-    private void Start()
-    {
-        _deadChannelEvent.OnEventRaised += IsDeadEvent;
-    }
     private void Input_Jump(InputAction.CallbackContext context)
     {
         _jumpChannelEvent.RaiseEvent();
@@ -67,6 +63,11 @@ public sealed class PlayerController : MonoBehaviour
         _playerInputActions.Player.HorizontalMove.performed += Input_HorizontalMove;
         _playerInputActions.Player.HorizontalMove.Enable();
     }
+    private void EnableEvents()
+    {
+        _deadChannelEvent.OnEventRaised += IsDeadEvent;
+
+    }
 
     private void DisableInputs()
     {
@@ -77,13 +78,21 @@ public sealed class PlayerController : MonoBehaviour
         _playerInputActions.Player.HorizontalMove.Disable();
     }
 
+    private void DisableEvents()
+    {
+        _deadChannelEvent.OnEventRaised -= IsDeadEvent;
+    }
+
+
     private void OnEnable()
     {
         EnableInputs();
+        EnableEvents();
     }
 
     private void OnDisable()
     {
         DisableInputs();
+        DisableEvents();
     }
 }

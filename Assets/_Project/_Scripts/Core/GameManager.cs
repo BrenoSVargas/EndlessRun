@@ -7,14 +7,31 @@ public class GameManager : MonoBehaviour
     [SerializeField] private VoidEventChannelSO _deadChannelEvent = default;
     [SerializeField] private VoidEventChannelSO _gameOverChannelEvent = default;
 
-    private void Start()
-    {
-        _deadChannelEvent.OnEventRaised += DeadPlayer;
-    }
-
     private void DeadPlayer()
     {
         StateMachineController.Instance.ChangeTo<GameOverState>();
         _gameOverChannelEvent.RaiseEvent();
+    }
+
+    private void EnableEvents()
+    {
+        _deadChannelEvent.OnEventRaised += DeadPlayer;
+    }
+
+    private void DisableEvents()
+    {
+        _deadChannelEvent.OnEventRaised -= DeadPlayer;
+
+    }
+
+    private void OnEnable()
+    {
+        EnableEvents();
+    }
+
+    private void OnDisable()
+    {
+        DisableEvents();
+
     }
 }

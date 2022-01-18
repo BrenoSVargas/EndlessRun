@@ -20,19 +20,33 @@ public class AnimatorController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
     }
-    private void Start()
-    {
-        _isDeadChannelEvent.OnEventRaised += IsDead;
-        _jumpChannelEvent.OnEventRaised += Jump;
-    }
 
-    public void Jump()
+    private void Jump()
     {
         _animator.SetTrigger(AnimatorParameters.Jump);
     }
 
-    public void IsDead()
+    private void IsDead()
     {
         _animator.SetTrigger(AnimatorParameters.Dead);
+    }
+    private void EnableEvents()
+    {
+        _isDeadChannelEvent.OnEventRaised += IsDead;
+        _jumpChannelEvent.OnEventRaised += Jump;
+    }
+    private void DisableEvents()
+    {
+        _isDeadChannelEvent.OnEventRaised -= IsDead;
+        _jumpChannelEvent.OnEventRaised -= Jump;
+    }
+
+    private void OnEnable()
+    {
+        EnableEvents();
+    }
+    private void OnDisable()
+    {
+        DisableEvents();
     }
 }

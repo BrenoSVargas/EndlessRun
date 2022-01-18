@@ -22,11 +22,6 @@ public class Movement : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        _jumpChannelEvent.OnEventRaised += Jump;
-        _horizontalChannelEvent.OnEventRaised += MoveToRole;
-    }
     private void MoveToRole(float xPos)
     {
         StopAllCoroutines();
@@ -53,5 +48,29 @@ public class Movement : MonoBehaviour
         transform.localPosition = new Vector3(xPos, transform.localPosition.y, transform.localPosition.z);
         yield return null;
 
+    }
+
+    private void EnableEvents()
+    {
+
+        _jumpChannelEvent.OnEventRaised += Jump;
+        _horizontalChannelEvent.OnEventRaised += MoveToRole;
+    }
+
+    private void DisableEvents()
+    {
+
+        _jumpChannelEvent.OnEventRaised -= Jump;
+        _horizontalChannelEvent.OnEventRaised -= MoveToRole;
+    }
+
+    private void OnEnable()
+    {
+        EnableEvents();
+    }
+
+    private void OnDisable()
+    {
+        DisableEvents();
     }
 }

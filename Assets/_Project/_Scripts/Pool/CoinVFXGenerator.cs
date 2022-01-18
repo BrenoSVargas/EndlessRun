@@ -7,13 +7,6 @@ public class CoinVFXGenerator : PoolManager
     [SerializeField] private VoidEventChannelSO _initGameEvent = default;
     [SerializeField] private PosEventChannelSO _coinEffcetsEvent = default;
 
-
-    private void Start()
-    {
-        _initGameEvent.OnEventRaised += InitGame;
-        _coinEffcetsEvent.OnEventRaised += GenerateCoinEffect;
-    }
-
     protected override void InitGame()
     {
         base.InitGame();
@@ -29,6 +22,32 @@ public class CoinVFXGenerator : PoolManager
         effectGO.SetActive(true);
         effectGO.transform.position = pos;
         
+    }
+
+
+
+    private void EnableEvents()
+    {
+        _initGameEvent.OnEventRaised += InitGame;
+        _coinEffcetsEvent.OnEventRaised += GenerateCoinEffect;
+
+    }
+
+    private void DisableEvents()
+    {
+        _initGameEvent.OnEventRaised -= InitGame;
+        _coinEffcetsEvent.OnEventRaised -= GenerateCoinEffect;
+
+    }
+
+    private void OnEnable()
+    {
+        EnableEvents();
+    }
+
+    private void OnDisable()
+    {
+        DisableEvents();
     }
 
 }

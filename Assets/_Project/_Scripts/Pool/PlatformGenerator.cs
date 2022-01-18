@@ -17,11 +17,6 @@ public sealed class PlatformGenerator : PoolManager
         base.Initialize(itemArray);
         _numberOfPlatforms = 20;
     }
-    private void Start()
-    {
-        _newPlatformEvent.OnEventRaised += GeneratePlatform;
-        _initGameEvent.OnEventRaised += InitGame;
-    }
 
     protected override void InitGame()
     {
@@ -64,5 +59,29 @@ public sealed class PlatformGenerator : PoolManager
         _lastPlatformTransform = platformGO.transform;
 
         platformGO.GetComponent<Platform>().SetPlatform();
+    }
+
+    private void EnableEvents()
+    {
+        _newPlatformEvent.OnEventRaised += GeneratePlatform;
+        _initGameEvent.OnEventRaised += InitGame;
+
+    }
+
+    private void DisableEvents()
+    {
+        _newPlatformEvent.OnEventRaised -= GeneratePlatform;
+        _initGameEvent.OnEventRaised -= InitGame;
+
+    }
+
+    private void OnEnable()
+    {
+        EnableEvents();
+    }
+
+    private void OnDisable()
+    {
+        DisableEvents();
     }
 }

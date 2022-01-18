@@ -26,14 +26,6 @@ public sealed class UIManager : MonoBehaviour
         SearchComponents();
         AddMethods();
     }
-
-    private void Start()
-    {
-        ScoreManager.Instance.OnScoreUpdate += ScoreManager_UpdateScore;
-        _coinsChangedEvent.OnEventRaised += EventManager_UpdateCoins;
-        _gameOverChannelEvent.OnEventRaised += GameManager_ShowGameOverUI;
-    }
-
     private void GameManager_ShowGameOverUI()
     {
         _gameOverPanel.MoveTo(PanelPosition.PositionType.Show);
@@ -90,6 +82,30 @@ public sealed class UIManager : MonoBehaviour
     private void EventManager_UpdateCoins(int coin)
     {
         _coinsText.text = coin.ToString();
+    }
+
+    private void EnableEvents()
+    {
+        ScoreManager.Instance.OnScoreUpdate += ScoreManager_UpdateScore;
+        _coinsChangedEvent.OnEventRaised += EventManager_UpdateCoins;
+        _gameOverChannelEvent.OnEventRaised += GameManager_ShowGameOverUI;
+    }
+
+    private void DisableEvents()
+    {
+        ScoreManager.Instance.OnScoreUpdate -= ScoreManager_UpdateScore;
+        _coinsChangedEvent.OnEventRaised -= EventManager_UpdateCoins;
+        _gameOverChannelEvent.OnEventRaised -= GameManager_ShowGameOverUI;
+    }
+
+    private void OnEnable()
+    {
+        EnableEvents();
+    }
+
+    private void OnDisable()
+    {
+        DisableEvents();
     }
 
 
