@@ -8,6 +8,7 @@ public class InGameState : State
 
     public override void Enter()
     {
+        machine.OnGameIsStarted.RaiseEvent();
         machine.gameIsRunning = true;
     }
     public override void Exit()

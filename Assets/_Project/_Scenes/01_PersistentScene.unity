@@ -399,6 +399,7 @@ MonoBehaviour:
   SaveMain: {fileID: 0}
   OnInitGameEvent: {fileID: 11400000, guid: f7864445c85684448a7eeeb37e7d088b, type: 2}
   OnScoreUpdateEvent: {fileID: 11400000, guid: 7beeb2c1c31ba4043831911a72212e27, type: 2}
+  OnGameIsStarted: {fileID: 11400000, guid: e78582f6cdd3e914f97a7afe4fbdd5c8, type: 2}
   gameIsRunning: 0
 --- !u!4 &298526687
 Transform:

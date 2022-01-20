@@ -12,19 +12,24 @@ public sealed class PlayerController : MonoBehaviour
     private Health _health;
     private PlayerInputActions _playerInputActions;
     private Movement _movement;
-    
-    [SerializeField] private VoidEventChannelSO _deadChannelEvent;
-    [SerializeField] private VoidEventChannelSO _jumpChannelEvent;
-    [SerializeField] private FloatEventChannelSO _horizontalChannelEvent;
+
+    [SerializeField] private VoidEventChannelSO _onDeadChannelEvent;
+    [SerializeField] private VoidEventChannelSO _onJumpChannelEvent;
+    [SerializeField] private FloatEventChannelSO _onHorizontalChannelEvent;
 
 
-    public void Initialize(float roleLeft, float roleMid, float roleRight)
+    public void Initialize(float roleLeft, float roleMid, float roleRight, VoidEventChannelSO deadChannel,
+        VoidEventChannelSO jumpChannel, FloatEventChannelSO horizontalChannel)
     {
         Awake();
 
         _rolePosX[0] = roleLeft;
         _rolePosX[1] = roleMid;
         _rolePosX[2] = roleRight;
+
+        _onDeadChannelEvent = deadChannel;
+        _onJumpChannelEvent = jumpChannel;
+        _onHorizontalChannelEvent = horizontalChannel;
     }
     private void Awake()
     {
@@ -35,10 +40,7 @@ public sealed class PlayerController : MonoBehaviour
     }
     private void Input_Jump(InputAction.CallbackContext context)
     {
-        if (isGrounded)
-        {
-            _jumpChannelEvent.RaiseEvent();
-        }
+        _onJumpChannelEvent.RaiseEvent();
     }
 
     private void Input_HorizontalMove(InputAction.CallbackContext context)
@@ -50,7 +52,7 @@ public sealed class PlayerController : MonoBehaviour
         else if (index > 2)
             index = 2;
 
-        _horizontalChannelEvent.RaiseEvent(_rolePosX[index]);
+        _onHorizontalChannelEvent.RaiseEvent(_rolePosX[index]);
     }
 
     private void IsDeadEvent()
@@ -68,7 +70,7 @@ public sealed class PlayerController : MonoBehaviour
     }
     private void EnableEvents()
     {
-        _deadChannelEvent.OnEventRaised += IsDeadEvent;
+        _onDeadChannelEvent.OnEventRaised += IsDeadEvent;
 
     }
 
@@ -83,7 +85,7 @@ public sealed class PlayerController : MonoBehaviour
 
     private void DisableEvents()
     {
-        _deadChannelEvent.OnEventRaised -= IsDeadEvent;
+        _onDeadChannelEvent.OnEventRaised -= IsDeadEvent;
     }
 
 

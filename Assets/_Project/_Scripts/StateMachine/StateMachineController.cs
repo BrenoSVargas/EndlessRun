@@ -38,18 +38,25 @@ public sealed class StateMachineController : MonoBehaviour
     [Header("Events Game")]
     public VoidEventChannelSO OnInitGameEvent = default;
     public VoidEventChannelSO OnScoreUpdateEvent = default;
+    public VoidEventChannelSO OnGameIsStarted = default;
+
 
 
     public bool gameIsRunning;
 
 
 
-    public void Initialize(float limitOfTime, float maxSpeed, float StartSpeedGame, VoidEventChannelSO initEvent)
+    public void Initialize(float limitOfTime, float maxSpeed, float StartSpeedGame,
+        VoidEventChannelSO initEvent, VoidEventChannelSO scoreUpEvent, VoidEventChannelSO GameStartEvent)
     {
         _busy = false;
         _timeLimit = limitOfTime;
         _maxSpeedGame = maxSpeed;
         _startSpeedGame = StartSpeedGame;
+
+        OnInitGameEvent = initEvent;
+        OnScoreUpdateEvent = scoreUpEvent;
+        OnGameIsStarted = GameStartEvent;
 
         Awake();
     }
