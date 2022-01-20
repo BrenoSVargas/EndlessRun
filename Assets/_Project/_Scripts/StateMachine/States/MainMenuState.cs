@@ -20,5 +20,12 @@ public class MainMenuState : State
 
             }
         }
+
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        machine.SaveMain.Load();
     }
 }

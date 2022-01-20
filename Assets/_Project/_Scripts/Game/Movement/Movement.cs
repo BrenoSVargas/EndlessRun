@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
         _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
-    IEnumerator MoveTo(float xPos)
+    private IEnumerator MoveTo(float xPos)
     {
         Vector3 startPos = transform.localPosition;
         Vector3 targetPos = new Vector3(xPos, transform.localPosition.y, transform.localPosition.z);

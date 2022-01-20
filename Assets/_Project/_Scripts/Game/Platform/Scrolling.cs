@@ -8,6 +8,6 @@ public class Scrolling : MonoBehaviour
     {
         if (!StateMachineController.Instance.gameIsRunning) return;
 
-        transform.Translate(Vector3.right * ScoreManager.Instance.SpeedGame);
+        transform.Translate(Vector3.right * StateMachineController.Instance.SpeedGame * Time.deltaTime);
     }
 }

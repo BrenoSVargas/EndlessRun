@@ -12,9 +12,15 @@ public sealed class UIManager : MonoBehaviour
     private PanelPositioner _pausePanel, _gameOverPanel;
 
     private TMP_Text _scoreText, _coinsText;
+    private TMP_Text _scoreGameOverTxt, _bestScoreGameOverTxt;
 
     [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
     [SerializeField] private VoidEventChannelSO _gameOverChannelEvent = default;
+
+    [SerializeField] private IntEventChannelSO _scoreChannelEvent = default;
+    [SerializeField] private IntEventChannelSO _bestScoreChannelEvent = default;
+    [SerializeField] private IntEventChannelSO _onIncreasedScoreChannelEvent = default;
+
 
 
     public void Initialize()
@@ -42,6 +48,9 @@ public sealed class UIManager : MonoBehaviour
 
         _scoreText = GameObject.Find("ScoreCountText").GetComponent<TMP_Text>();
         _coinsText = GameObject.Find("CoinsCountText").GetComponent<TMP_Text>();
+
+        _scoreGameOverTxt = GameObject.Find("ScoreValueTxt").GetComponent<TMP_Text>();
+        _bestScoreGameOverTxt = GameObject.Find("BestScoreValueTxt").GetComponent<TMP_Text>();
 
         _pausePanel = GameObject.Find("PausePanel").GetComponent<PanelPositioner>();
         _gameOverPanel = GameObject.Find("GameOverPanel").GetComponent<PanelPositioner>();
@@ -84,18 +93,34 @@ public sealed class UIManager : MonoBehaviour
         _coinsText.text = coin.ToString();
     }
 
+    private void ScoreManager_SetScoreFinish(int value)
+    {
+        _scoreGameOverTxt.text = value.ToString("D6");
+    }
+
+    private void ScoreManager_SetBestScoreFinish(int value)
+    {
+        _bestScoreGameOverTxt.text = value.ToString("D6");
+    }
+
+
     private void EnableEvents()
     {
-        ScoreManager.Instance.OnScoreUpdate += ScoreManager_UpdateScore;
+        _onIncreasedScoreChannelEvent.OnEventRaised += ScoreManager_UpdateScore;
         _coinsChangedEvent.OnEventRaised += EventManager_UpdateCoins;
         _gameOverChannelEvent.OnEventRaised += GameManager_ShowGameOverUI;
+        _scoreChannelEvent.OnEventRaised += ScoreManager_SetScoreFinish;
+        _bestScoreChannelEvent.OnEventRaised += ScoreManager_SetBestScoreFinish;
+
     }
 
     private void DisableEvents()
     {
-        ScoreManager.Instance.OnScoreUpdate -= ScoreManager_UpdateScore;
+        _onIncreasedScoreChannelEvent.OnEventRaised -= ScoreManager_UpdateScore;
         _coinsChangedEvent.OnEventRaised -= EventManager_UpdateCoins;
         _gameOverChannelEvent.OnEventRaised -= GameManager_ShowGameOverUI;
+        _scoreChannelEvent.OnEventRaised -= ScoreManager_SetScoreFinish;
+        _bestScoreChannelEvent.OnEventRaised -= ScoreManager_SetBestScoreFinish;
     }
 
     private void OnEnable()

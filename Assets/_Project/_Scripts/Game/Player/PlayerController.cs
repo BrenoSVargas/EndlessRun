@@ -12,7 +12,7 @@ public sealed class PlayerController : MonoBehaviour
     private Health _health;
     private PlayerInputActions _playerInputActions;
     private Movement _movement;
-
+    
     [SerializeField] private VoidEventChannelSO _deadChannelEvent;
     [SerializeField] private VoidEventChannelSO _jumpChannelEvent;
     [SerializeField] private FloatEventChannelSO _horizontalChannelEvent;
@@ -35,7 +35,10 @@ public sealed class PlayerController : MonoBehaviour
     }
     private void Input_Jump(InputAction.CallbackContext context)
     {
-        _jumpChannelEvent.RaiseEvent();
+        if (isGrounded)
+        {
+            _jumpChannelEvent.RaiseEvent();
+        }
     }
 
     private void Input_HorizontalMove(InputAction.CallbackContext context)

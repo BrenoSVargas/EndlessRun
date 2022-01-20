@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private VoidEventChannelSO _isDeadChannelEvent;
+    [SerializeField] private VoidEventChannelSO _isDeadChannelEvent = default;
 
     private void OnTriggerEnter(Collider other)
     {

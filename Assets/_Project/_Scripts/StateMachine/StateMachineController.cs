@@ -8,7 +8,7 @@ public sealed class StateMachineController : MonoBehaviour
     public static StateMachineController Instance { get { return _instance; } }
 
     private State _current;
-    public State current { get { return _current; } }
+    public State Current { get { return _current; } }
     private bool _busy;
 
     [Header("Loading State")]
@@ -18,20 +18,39 @@ public sealed class StateMachineController : MonoBehaviour
 
     [Header("In Game State")]
     [SerializeField] private float _timeLimit = 10f;
+    [SerializeField] private float _maxSpeedGame = 25f;
+    [SerializeField] private float _timeMultiplayerSpeed = 1.2f;
+    [SerializeField] private float _startSpeedGame = 12f;
+
+    public float SpeedGame = 12f;
+    [HideInInspector] public float StartSpeedGame { get { return _startSpeedGame; } }
+    [HideInInspector] public float MaxSpeedGame { get { return _maxSpeedGame; } }
     [HideInInspector] public float TimeLimit { get { return _timeLimit; } }
+    [HideInInspector] public float TimeMultiplayerSpeed { get { return _timeMultiplayerSpeed; } }
+
+
+
+
+    [Header("Save System")]
+    public SaveWrapper SaveMain;
 
 
     [Header("Events Game")]
     public VoidEventChannelSO OnInitGameEvent = default;
+    public VoidEventChannelSO OnScoreUpdateEvent = default;
+
 
     public bool gameIsRunning;
 
 
 
-    public void Initialize()
+    public void Initialize(float limitOfTime, float maxSpeed, float StartSpeedGame, VoidEventChannelSO initEvent)
     {
         _busy = false;
-        _timeLimit = 10f;
+        _timeLimit = limitOfTime;
+        _maxSpeedGame = maxSpeed;
+        _startSpeedGame = StartSpeedGame;
+
         Awake();
     }
 
@@ -43,6 +62,8 @@ public sealed class StateMachineController : MonoBehaviour
         LoadingBar = GameObject.Find("LoadingBar").GetComponent<Slider>();
         LoadingText = GameObject.Find("LoadText").GetComponent<TMP_Text>();
 
+        SaveMain = GameObject.Find("DataManager").GetComponent<SaveWrapper>();
+
         LoadingScreen.SetActive(false);
     }
 
@@ -53,7 +74,7 @@ public sealed class StateMachineController : MonoBehaviour
 
     private void Update()
     {
-        current.UpdateState();
+        Current.UpdateState();
     }
 
     public void ChangeTo<T>() where T : State

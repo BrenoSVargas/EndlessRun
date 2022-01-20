@@ -5,6 +5,7 @@ using UnityEngine;
 public class InGameState : State
 {
     private float timeCounter;
+
     public override void Enter()
     {
         machine.gameIsRunning = true;
@@ -12,18 +13,27 @@ public class InGameState : State
     public override void Exit()
     {
         machine.gameIsRunning = false;
-
     }
     public override void UpdateState()
     {
         timeCounter += Time.deltaTime;
 
-        if (ScoreManager.Instance.SpeedGame < 1f && timeCounter >= machine.TimeLimit)
+        if (machine.SpeedGame < machine.MaxSpeedGame && timeCounter >= machine.TimeLimit)
         {
             timeCounter = 0;
-            ScoreManager.Instance.UpdateSpeedGame();
+            UpdateSpeedGame();
+
+            if (machine.SpeedGame > machine.MaxSpeedGame)
+            {
+                machine.SpeedGame = machine.MaxSpeedGame;
+            }
         }
 
-        ScoreManager.Instance.ScorerUpdateEveryFrame();
+        machine.OnScoreUpdateEvent.RaiseEvent();
+    }
+
+    private void UpdateSpeedGame()
+    {
+        machine.SpeedGame *= machine.TimeMultiplayerSpeed;
     }
 }

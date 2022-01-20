@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6077451453980724345}
   - component: {fileID: 7878888186026058874}
   - component: {fileID: 6956347398744103724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BasicPlatform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,9 +213,6 @@ MonoBehaviour:
   _typePlatform: 0
   _offsetToInstantiate: {x: 0, y: -10, z: 0}
   _sumPosZ: 20
-  chanceOfObstacle: 10
-  obstacles:
-  - {fileID: 1540718730489084839, guid: ce9d0cccebf8b254baf704f3b1c53409, type: 3}
 --- !u!114 &7878888186026058874
 MonoBehaviour:
   m_ObjectHideFlags: 0

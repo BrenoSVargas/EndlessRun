@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8983531019694065457}
   - component: {fileID: 2959275180335114107}
   - component: {fileID: 6270546397982923744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformOneWayJapan 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,8 +51,6 @@ MonoBehaviour:
   _typePlatform: 1
   _offsetToInstantiate: {x: 0, y: -2.1, z: 0}
   _sumPosZ: 15
-  chanceOfObstacle: 0
-  obstacles: []
   _rolesPosition:
   - -3.5
   - 0
@@ -102,6 +100,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3202973970893330071}
     m_Modifications:
+    - target: {fileID: 1000013069648538, guid: f0fe02860e2424f9fb67bb4facbb7891, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012960028484, guid: f0fe02860e2424f9fb67bb4facbb7891, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -147,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 1259308759151230, guid: 39d889c36e2a84b509941a3e8d8120a9, type: 3}
       propertyPath: m_Name
       value: bridge-japan
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259308759151230, guid: 39d889c36e2a84b509941a3e8d8120a9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4381001562348158, guid: 39d889c36e2a84b509941a3e8d8120a9, type: 3}
       propertyPath: m_RootOrder

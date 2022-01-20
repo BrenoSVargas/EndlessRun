@@ -46,13 +46,19 @@ public class LoadState : State
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)SceneIndexer.GAME));
 
+
+
         yield return new WaitForSeconds(1f);
 
         percentLoad = 50;
         LoadUpdateUI(percentLoad);
+
+        machine.SaveMain.Load();
         machine.OnInitGameEvent.RaiseEvent();
 
         yield return new WaitForSeconds(1f);
+        percentLoad = 75;
+        machine.SpeedGame = machine.StartSpeedGame;
         percentLoad = 100;
         LoadUpdateUI(percentLoad);
         yield return new WaitForSeconds(0.5f);

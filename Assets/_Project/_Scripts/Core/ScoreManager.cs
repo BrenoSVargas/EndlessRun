@@ -3,51 +3,89 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour, ISaveable
 {
-    private static ScoreManager _instance;
-    public static ScoreManager Instance { get { return _instance; } }
-    private float _speedGame;
-    public float SpeedGame { get { return _speedGame; } }
     private int _scoreCounter;
+    private int _bestScore;
     private float _scoreHandleCounter;
 
-    public Action<int> OnScoreUpdate;
+    public float SmoothScoreCounter = 1f;
 
-    public float StartSpeedGame = 0.2f;
-    public float SmoothScoreCounter = 20f;
-    public float TimeMultiplayerSpeed = 1.2f;
+    [SerializeField] private VoidEventChannelSO _onDeadChannelEvent = default;
+    [SerializeField] private VoidEventChannelSO _onScoreUpdateEveryFrameEvent = default;
+    [SerializeField] private IntEventChannelSO _onScoreChannelEvent = default;
+    [SerializeField] private IntEventChannelSO _onIncreasedScoreChannelEvent = default;
+    [SerializeField] private IntEventChannelSO _onBestScoreChannelEvent = default;
+
+
 
     public void Initialize()
     {
-        SmoothScoreCounter = 20f;
-        StartSpeedGame = 0.2f;
-        TimeMultiplayerSpeed = 1.2f;
+        SmoothScoreCounter = 1f;
         Awake();
     }
 
     private void Awake()
     {
-        _instance = this;
         InitGame();
     }
 
     public void ScorerUpdateEveryFrame()
     {
-        _scoreHandleCounter += _speedGame * Time.deltaTime * SmoothScoreCounter;
+        _scoreHandleCounter += StateMachineController.Instance.SpeedGame * Time.deltaTime * SmoothScoreCounter;
         _scoreCounter = Mathf.RoundToInt(_scoreHandleCounter);
 
-        OnScoreUpdate?.Invoke(_scoreCounter);
-    }
-
-    public void UpdateSpeedGame()
-    {
-        _speedGame *= TimeMultiplayerSpeed;
+        _onIncreasedScoreChannelEvent.RaiseEvent(_scoreCounter);
     }
 
     public void InitGame()
     {
         _scoreCounter = 0;
-        _speedGame = StartSpeedGame;
     }
+
+    public object CaptureData()
+    {
+        return _bestScore;
+    }
+
+    public void RestoreData(object state)
+    {
+        _bestScore = (int)state;
+    }
+
+    private void ScoreManager_CheckIsBestScore()
+    {
+        if (_scoreCounter > _bestScore)
+        {
+            _bestScore = _scoreCounter;
+        }
+
+        _onScoreChannelEvent.RaiseEvent(_scoreCounter);
+        _onBestScoreChannelEvent.RaiseEvent(_bestScore);
+    }
+
+    private void EnableEvents()
+    {
+        _onDeadChannelEvent.OnEventRaised += ScoreManager_CheckIsBestScore;
+        _onScoreUpdateEveryFrameEvent.OnEventRaised += ScorerUpdateEveryFrame;
+    }
+
+    private void DisableEvents()
+    {
+        _onDeadChannelEvent.OnEventRaised -= ScoreManager_CheckIsBestScore;
+        _onScoreUpdateEveryFrameEvent.OnEventRaised -= ScorerUpdateEveryFrame;
+
+
+    }
+
+    private void OnEnable()
+    {
+        EnableEvents();
+    }
+
+    private void OnDisable()
+    {
+        DisableEvents();
+    }
+
 }

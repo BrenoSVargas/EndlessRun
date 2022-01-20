@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5216982981331224768}
   - component: {fileID: 5831857276954841845}
   - component: {fileID: 1540718730489084839}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SmokeObstacle
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
