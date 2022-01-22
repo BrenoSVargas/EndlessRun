@@ -26,10 +26,10 @@ public class SwapSpriteButtton : MonoBehaviour
 
     private void Awake()
     {
-        SearchComponents();
+        SearchAndComponents();
     }
 
-    private void SearchComponents()
+    private void SearchAndComponents()
     {
         _image = GetComponent<Image>();
     }

@@ -8,7 +8,17 @@ public class CinemachineFollowPlayer : MonoBehaviour
     private CinemachineVirtualCamera _virtualCinemachine;
     [SerializeField] private VoidEventChannelSO _isDeadChannelEvent;
 
-    private void Start()
+    public void Initialize(VoidEventChannelSO isDeadEvent){
+        _isDeadChannelEvent = isDeadEvent;
+        Awake();
+    }
+
+    private void Awake()
+    {
+        SearchAndComponents();
+    }
+
+    private void SearchAndComponents()
     {
         _virtualCinemachine = GetComponent<CinemachineVirtualCamera>();
     }

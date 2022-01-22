@@ -11,8 +11,10 @@ public class Movement : MonoBehaviour
     [SerializeField] private FloatEventChannelSO _horizontalChannelEvent;
 
 
-    public void Initialize(float jumpForce)
+    public void Initialize(float jumpForce, VoidEventChannelSO jumpChannelEvent,FloatEventChannelSO horizontalChannelEvent)
     {
+        _jumpChannelEvent = jumpChannelEvent;
+        _horizontalChannelEvent = horizontalChannelEvent;
         _jumpForce = jumpForce;
         Awake();
     }

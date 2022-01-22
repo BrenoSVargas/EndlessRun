@@ -9,7 +9,18 @@ public class Coin : Item
     [SerializeField] private IntEventChannelSO _coinsCounterEvent = default;
     [SerializeField] private PosEventChannelSO _coinEffcetsEvent = default;
 
+    public void Initialize(IntEventChannelSO coinsCounterEvent, PosEventChannelSO coinEffectsEvent)
+    {
+        _coinsCounterEvent = coinsCounterEvent;
+        _coinEffcetsEvent = coinEffectsEvent;
+    }
+
     private void Start()
+    {
+        SearchAndSetComponents();
+    }
+
+    private void SearchAndSetComponents()
     {
         meshRenderer = GetComponent<MeshRenderer>();
     }

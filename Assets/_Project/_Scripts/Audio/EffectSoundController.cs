@@ -18,8 +18,14 @@ public class EffectSoundController : MonoBehaviour
 
     private void Awake()
     {
+        SearchAndSetComponents();
+    }
+
+    private void SearchAndSetComponents()
+    {
         _audioSource = GetComponent<AudioSource>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         CheckAndStartEffect();
@@ -47,7 +53,7 @@ public class EffectSoundController : MonoBehaviour
     }
     private void DisableEvents()
     {
-        _onOffAudio.OnEventRaised += UIManager_OnOffAudio;
+        _onOffAudio.OnEventRaised -= UIManager_OnOffAudio;
     }
 
     private void OnEnable()

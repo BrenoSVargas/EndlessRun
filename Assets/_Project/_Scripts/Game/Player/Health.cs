@@ -7,6 +7,10 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private VoidEventChannelSO _isDeadChannelEvent = default;
 
+    public void Initialize(VoidEventChannelSO isDeadChannel)
+    {
+        _isDeadChannelEvent = isDeadChannel;
+    }
     private void OnTriggerEnter(Collider other)
     {
         Obstacle obs = other.gameObject.GetComponent<Obstacle>();

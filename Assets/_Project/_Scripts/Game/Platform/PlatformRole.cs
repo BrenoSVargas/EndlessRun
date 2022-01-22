@@ -10,10 +10,16 @@ public class PlatformRole : MonoBehaviour
 
     public void Initialize(int randomChance)
     {
+        _roles = new List<CoinRow>();
         _randomChance = randomChance;
         Awake();
     }
     private void Awake()
+    {
+        SearchAndSetComponents();
+    }
+
+    private void SearchAndSetComponents()
     {
         _roles.AddRange(GetComponentsInChildren<CoinRow>());
     }

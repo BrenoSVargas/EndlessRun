@@ -12,10 +12,12 @@ public sealed class PlatformGenerator : PoolManager
     private Transform _lastPlatformTransform;
 
 
-    public override void Initialize(PoolItem[] itemArray)
+    public void Initialize(PoolItem[] itemArray, int numberOfPlatforms, VoidEventChannelSO newPlatformChannel, VoidEventChannelSO initGameChannel)
     {
         base.Initialize(itemArray);
-        _numberOfPlatforms = 20;
+        _numberOfPlatforms = numberOfPlatforms;
+        _newPlatformEvent = newPlatformChannel;
+        _initGameEvent = initGameChannel;
     }
 
     protected override void InitGame()

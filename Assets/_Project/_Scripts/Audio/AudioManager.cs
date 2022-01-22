@@ -20,8 +20,14 @@ public sealed class AudioManager : MonoBehaviour
     }
     private void Awake()
     {
+        SearchAndSetComponents();
+    }
+
+    private void SearchAndSetComponents()
+    {
         _audioSource = GetComponent<AudioSource>();
     }
+
     private void OnPlayAudioBackground()
     {
         if (!isAudioEnable)

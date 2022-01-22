@@ -15,4 +15,11 @@ public abstract class Platform : MonoBehaviour
 
     public abstract void SetPlatform();
 
+    public virtual void Initialize(PlatformsType type, Vector3 offset, float sumPosZ)
+    {
+        _typePlatform = type;
+        _offsetToInstantiate = offset;
+        _sumPosZ = sumPosZ;
+    }
+
 }

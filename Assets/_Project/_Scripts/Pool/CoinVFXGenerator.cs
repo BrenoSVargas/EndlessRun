@@ -5,8 +5,13 @@ using UnityEngine;
 public class CoinVFXGenerator : PoolManager
 {
     [SerializeField] private VoidEventChannelSO _initGameEvent = default;
-    [SerializeField] private PosEventChannelSO _coinEffcetsEvent = default;
+    [SerializeField] private PosEventChannelSO _coinEffctesEvent = default;
 
+    public void Initialize(VoidEventChannelSO initGame, PosEventChannelSO coinEffects)
+    {
+        _initGameEvent = initGame;
+        _coinEffctesEvent = coinEffects;
+    }
     protected override void InitGame()
     {
         base.InitGame();
@@ -21,7 +26,7 @@ public class CoinVFXGenerator : PoolManager
 
         effectGO.SetActive(true);
         effectGO.transform.position = pos;
-        
+
     }
 
 
@@ -29,14 +34,14 @@ public class CoinVFXGenerator : PoolManager
     private void EnableEvents()
     {
         _initGameEvent.OnEventRaised += InitGame;
-        _coinEffcetsEvent.OnEventRaised += GenerateCoinEffect;
+        _coinEffctesEvent.OnEventRaised += GenerateCoinEffect;
 
     }
 
     private void DisableEvents()
     {
         _initGameEvent.OnEventRaised -= InitGame;
-        _coinEffcetsEvent.OnEventRaised -= GenerateCoinEffect;
+        _coinEffctesEvent.OnEventRaised -= GenerateCoinEffect;
 
     }
 

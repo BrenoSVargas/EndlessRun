@@ -11,12 +11,19 @@ public class AnimatorController : MonoBehaviour
     [SerializeField] private VoidEventChannelSO _isDeadChannelEvent;
     [SerializeField] private VoidEventChannelSO _jumpChannelEvent;
 
-    public void Initialize()
+    public void Initialize(VoidEventChannelSO isDeadChannel, VoidEventChannelSO jumpChannel)
     {
+        _isDeadChannelEvent = isDeadChannel;
+        _jumpChannelEvent = jumpChannel;
         Awake();
     }
 
     private void Awake()
+    {
+        SearchAndSetComponents();
+    }
+
+    private void SearchAndSetComponents()
     {
         _animator = GetComponent<Animator>();
     }

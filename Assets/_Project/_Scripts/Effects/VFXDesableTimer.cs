@@ -8,10 +8,19 @@ public class VFXDesableTimer : MonoBehaviour
 {
     private ParticleSystem ps;
 
+    public void Initialize(){
+        Awake();
+    }
+
     private void Awake()
     {
-        ps = GetComponent<ParticleSystem>();
+        SearchAndSetComponents();
 
+    }
+
+    private void SearchAndSetComponents()
+    {
+        ps = GetComponent<ParticleSystem>();
     }
 
     void OnEnable()

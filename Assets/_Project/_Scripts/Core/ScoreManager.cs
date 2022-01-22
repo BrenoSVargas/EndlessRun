@@ -19,8 +19,15 @@ public class ScoreManager : MonoBehaviour, ISaveable
 
 
 
-    public void Initialize()
+    public void Initialize(VoidEventChannelSO onDeadChannelEvent, VoidEventChannelSO onScoreUpdateChannelEvent,
+        IntEventChannelSO onScoreChannelEvent, IntEventChannelSO onIncreasedScoreChannel, IntEventChannelSO onBestScoreChannel)
     {
+        _onDeadChannelEvent = onDeadChannelEvent;
+        _onScoreUpdateEveryFrameEvent = onScoreUpdateChannelEvent;
+        _onScoreChannelEvent = onScoreChannelEvent;
+        _onIncreasedScoreChannelEvent =onIncreasedScoreChannel;
+        _onBestScoreChannelEvent = onBestScoreChannel;
+
         SmoothScoreCounter = 1f;
         Awake();
     }

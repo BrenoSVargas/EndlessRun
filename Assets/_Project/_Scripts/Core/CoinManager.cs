@@ -10,8 +10,13 @@ public class CoinManager : MonoBehaviour, ISaveable
     [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
     [SerializeField] private VoidEventChannelSO _initEvent = default;
 
-
-    public void Init()
+    public void Initialize(IntEventChannelSO coinsCounter, IntEventChannelSO coinsChanged, VoidEventChannelSO initEvent)
+    {
+        _coinsCounterEvent = coinsCounter;
+        _coinsChangedEvent = coinsChanged;
+        _initEvent = initEvent;
+    }
+    private void Init()
     {
         _coinsChangedEvent.OnEventRaised(_coinCounter);
 

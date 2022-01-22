@@ -8,6 +8,10 @@ public class Ranking : MonoBehaviour, ISaveable
     private int _bestScore;
     [SerializeField] private IntEventChannelSO _bestScoreChannelEvent = default;
 
+    public void Initialize(IntEventChannelSO bestScoreChannel)
+    {
+        _bestScoreChannelEvent = bestScoreChannel;
+    }
     public object CaptureData()
     {
         return _bestScore;
