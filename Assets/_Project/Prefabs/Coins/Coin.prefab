@@ -244,3 +244,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sFXAudio: {fileID: 8300000, guid: a30d7b56c91da39449abcfb1e12b2720, type: 3}
+  _onOffAudio: {fileID: 11400000, guid: 4699541e2b9486648b450eb087276921, type: 2}

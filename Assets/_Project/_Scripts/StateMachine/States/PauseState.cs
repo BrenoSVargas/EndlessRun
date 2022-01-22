@@ -6,14 +6,10 @@ public class PauseState : State
 {
     public override void Enter()
     {
-        machine.gameIsRunning = true;
-        Time.timeScale = 0f;
+        machine.gameIsRunning = false;
     }
     public override void Exit()
     {
-        machine.gameIsRunning = false;
-        Time.timeScale = 1f;
-
-
+        machine.gameIsRunning = true;
     }
 }

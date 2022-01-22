@@ -1188,6 +1188,10 @@ MonoBehaviour:
   - -3.5
   - 0
   - 3.5
+  _sensibilityTouchInput: 8
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _onDeadChannelEvent: {fileID: 11400000, guid: ff771d030701ea24aa23a2c06857c165, type: 2}
   _onJumpChannelEvent: {fileID: 11400000, guid: 81fcfa19d28e7f0458fd26e24c998902, type: 2}
   _onHorizontalChannelEvent: {fileID: 11400000, guid: 60803b8406cf7914aa736a7656f63576, type: 2}

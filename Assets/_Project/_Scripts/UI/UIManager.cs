@@ -13,6 +13,7 @@ public sealed class UIManager : MonoBehaviour
 
     private TMP_Text _scoreText, _coinsText;
     private TMP_Text _scoreGameOverTxt, _bestScoreGameOverTxt;
+    private bool _handleOnOffAudio = true;
 
     [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
     [SerializeField] private VoidEventChannelSO _gameOverChannelEvent = default;
@@ -20,11 +21,20 @@ public sealed class UIManager : MonoBehaviour
     [SerializeField] private IntEventChannelSO _scoreChannelEvent = default;
     [SerializeField] private IntEventChannelSO _bestScoreChannelEvent = default;
     [SerializeField] private IntEventChannelSO _onIncreasedScoreChannelEvent = default;
+    [SerializeField] private BoolEventChannelSO _onOffAudio = default;
 
 
 
-    public void Initialize()
+    public void Initialize(IntEventChannelSO coinsChangedEvent, VoidEventChannelSO gameOverChannelEvent, IntEventChannelSO scoreChannelEvent,
+       IntEventChannelSO bestScoreChannelEvent, IntEventChannelSO onIncreasedScoreChannelEvent, BoolEventChannelSO onOffAudio)
     {
+        _coinsChangedEvent = coinsChangedEvent;
+        _gameOverChannelEvent = gameOverChannelEvent;
+        _scoreChannelEvent = scoreChannelEvent;
+        _bestScoreChannelEvent = bestScoreChannelEvent;
+        _onIncreasedScoreChannelEvent = onIncreasedScoreChannelEvent;
+        _onOffAudio = onOffAudio;
+
         Awake();
     }
     private void Awake()
@@ -60,8 +70,19 @@ public sealed class UIManager : MonoBehaviour
         //Methods
         _pauseButton.onClick.AddListener(PauseGame);
         _returnGameButton.onClick.AddListener(ReturnGame);
+        _soundButton.onClick.AddListener(CallAudio_OnOff);
         _exitButton.onClick.AddListener(ExitGame);
         _exitButtonGO.onClick.AddListener(ExitGame);
+    }
+
+    private void CallAudio_OnOff()
+    {
+        _onOffAudio.RaiseEvent(!_handleOnOffAudio);
+    }
+
+    private void AudioOnOff(bool value)
+    {
+        _handleOnOffAudio = value;
     }
 
     private void PauseGame()
@@ -111,6 +132,7 @@ public sealed class UIManager : MonoBehaviour
         _gameOverChannelEvent.OnEventRaised += GameManager_ShowGameOverUI;
         _scoreChannelEvent.OnEventRaised += ScoreManager_SetScoreFinish;
         _bestScoreChannelEvent.OnEventRaised += ScoreManager_SetBestScoreFinish;
+        _onOffAudio.OnEventRaised += AudioOnOff;
 
     }
 
@@ -121,6 +143,8 @@ public sealed class UIManager : MonoBehaviour
         _gameOverChannelEvent.OnEventRaised -= GameManager_ShowGameOverUI;
         _scoreChannelEvent.OnEventRaised -= ScoreManager_SetScoreFinish;
         _bestScoreChannelEvent.OnEventRaised -= ScoreManager_SetBestScoreFinish;
+        _onOffAudio.OnEventRaised -= AudioOnOff;
+
     }
 
     private void OnEnable()

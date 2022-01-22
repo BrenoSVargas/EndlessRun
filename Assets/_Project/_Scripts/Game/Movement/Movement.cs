@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {        
         _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
 
         while (Vector3.Distance(transform.localPosition, new Vector3(xPos, transform.localPosition.y, transform.localPosition.z)) > 0.01f)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(xPos, transform.localPosition.y, transform.localPosition.z), 5f * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(xPos, transform.localPosition.y, transform.localPosition.z), 6f * Time.deltaTime);
 
             yield return null;
         }

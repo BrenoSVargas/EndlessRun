@@ -9,11 +9,13 @@ public sealed class AudioManager : MonoBehaviour
     private AudioSource _audioSource;
 
     [SerializeField] private VoidEventChannelSO _onInitGameChannelEvent = default;
+    [SerializeField] private BoolEventChannelSO _onOffAudio = default;
 
-    public void Initialize(AudioClip music, VoidEventChannelSO initEvent)
+    public void Initialize(AudioClip music, VoidEventChannelSO initEvent, BoolEventChannelSO onOffAudio)
     {
         _musicAudio = music;
         _onInitGameChannelEvent = initEvent;
+        _onOffAudio = onOffAudio;
 
     }
     private void Awake()
@@ -22,6 +24,11 @@ public sealed class AudioManager : MonoBehaviour
     }
     private void OnPlayAudioBackground()
     {
+        if (!isAudioEnable)
+        {
+            _audioSource.Stop();
+            return;
+        }
         if (_audioSource.clip == null)
         {
             _audioSource.clip = _musicAudio;
@@ -30,14 +37,22 @@ public sealed class AudioManager : MonoBehaviour
         _audioSource.Play();
     }
 
+    private void UIManager_OnOffAudio(bool value)
+    {
+        isAudioEnable = value;
+        OnPlayAudioBackground();
+    }
+
 
     private void EnableEvents()
     {
         _onInitGameChannelEvent.OnEventRaised += OnPlayAudioBackground;
+        _onOffAudio.OnEventRaised += UIManager_OnOffAudio;
     }
     private void DisableEvents()
     {
         _onInitGameChannelEvent.OnEventRaised -= OnPlayAudioBackground;
+        _onOffAudio.OnEventRaised -= UIManager_OnOffAudio;
     }
 
     private void OnEnable()

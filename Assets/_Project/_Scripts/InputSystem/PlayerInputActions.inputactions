@@ -36,6 +36,28 @@
                 },
                 {
                     "name": "1D Axis",
+                    "id": "bed35781-1683-402d-8a34-2f10b1e97791",
+                    "path": "1DAxis(whichSideWins=1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Positive",
+                    "id": "79e38d58-66f6-4933-96fc-a8fccc72d014",
+                    "path": "<Touchscreen>/primaryTouch/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
                     "id": "84ec908d-1c17-4dc2-9c36-77b06fe1b76e",
                     "path": "1DAxis",
                     "interactions": "",
@@ -60,6 +82,39 @@
                     "name": "positive",
                     "id": "c3494af0-40ea-4a0e-897d-82df22b2d6ee",
                     "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "49a3d0b3-b495-4842-9df6-031911697383",
+                    "path": "1DAxis(whichSideWins=1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMove",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e4f34a00-cd46-454a-b1a3-4318b18d5854",
+                    "path": "<Touchscreen>/primaryTouch/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "1b42b07b-986c-45fe-8110-e4dd6c92a7df",
+                    "path": "<Touchscreen>/primaryTouch/delta/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

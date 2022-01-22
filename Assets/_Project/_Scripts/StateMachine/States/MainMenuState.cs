@@ -8,6 +8,7 @@ public class MainMenuState : State
 {
     public override void Enter()
     {
+        machine.gameIsRunning = false;
         SceneManager.LoadScene((int)SceneIndexer.MAINMENU, LoadSceneMode.Additive);
 
 
