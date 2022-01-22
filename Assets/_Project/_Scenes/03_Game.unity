@@ -2839,7 +2839,7 @@ MonoBehaviour:
     expendable: 1
   pooledItems: []
   _initGameEvent: {fileID: 11400000, guid: f7864445c85684448a7eeeb37e7d088b, type: 2}
-  _coinEffcetsEvent: {fileID: 11400000, guid: 9eaefd8662a890f4e939fedda7b81d51, type: 2}
+  _coinEffctesEvent: {fileID: 11400000, guid: 9eaefd8662a890f4e939fedda7b81d51, type: 2}
 --- !u!1 &1584366398
 GameObject:
   m_ObjectHideFlags: 0
