@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class SaveableEntity : MonoBehaviour
 {
-
-    [SerializeField] string uniqueIdentifier = "";
+    [SerializeField] private string uniqueIdentifier = "";
     static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
 
     public void Initialize(string identifier){

@@ -5,8 +5,8 @@ using Cinemachine;
 
 public class CinemachineFollowPlayer : MonoBehaviour
 {
-    private CinemachineVirtualCamera _virtualCinemachine;
     [SerializeField] private VoidEventChannelSO _isDeadChannelEvent;
+    private CinemachineVirtualCamera _virtualCinemachine;
 
     public void Initialize(VoidEventChannelSO isDeadEvent){
         _isDeadChannelEvent = isDeadEvent;

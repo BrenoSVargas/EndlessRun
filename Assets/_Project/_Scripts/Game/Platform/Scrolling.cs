@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class Scrolling : MonoBehaviour
 {
+    private StateMachineController _machine;
+
+    private void Awake()
+    {
+        _machine = StateMachineController.Instance;
+    }
+
     private void FixedUpdate()
     {
-        if (!StateMachineController.Instance.gameIsRunning) return;
+        if (!_machine.gameIsRunning)
+        {
+            return;
+        }
 
-        transform.Translate(Vector3.right * StateMachineController.Instance.SpeedGame * Time.deltaTime);
+        transform.Translate(Vector3.right * _machine.SpeedGame * Time.deltaTime);
     }
 }

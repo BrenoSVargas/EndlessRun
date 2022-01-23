@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveWrapper : MonoBehaviour
 {
-    const string defaultSaveFile = "save";
+    private const string defaultSaveFile = "save";
     public void Load()
     {
         GetComponent<SaveSystem>().Load(defaultSaveFile);

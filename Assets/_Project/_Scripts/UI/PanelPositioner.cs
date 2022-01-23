@@ -6,7 +6,7 @@ using UnityEngine;
 public sealed class PanelPositioner : MonoBehaviour
 {
     public List<PanelPosition> positions;
-    RectTransform _rect;
+    private RectTransform _rect;
 
     private void Awake()
     {

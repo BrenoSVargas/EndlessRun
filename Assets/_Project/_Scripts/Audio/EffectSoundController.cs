@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class EffectSoundController : MonoBehaviour
 {
-    private bool isAudioEnable = true;
     [SerializeField] private AudioClip _sFXAudio;
-    private AudioSource _audioSource;
     [SerializeField] private BoolEventChannelSO _onOffAudio = default;
+
+    private bool isAudioEnable = true;
+    private AudioSource _audioSource;
 
     public void Initialize(AudioClip sFXAudio, BoolEventChannelSO onOffAudio)
     {
@@ -24,6 +25,11 @@ public class EffectSoundController : MonoBehaviour
     private void SearchAndSetComponents()
     {
         _audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        isAudioEnable = AudioManager.AudioEnabled;
     }
 
     private void OnTriggerEnter(Collider other)

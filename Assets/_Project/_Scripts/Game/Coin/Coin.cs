@@ -36,14 +36,17 @@ public class Coin : Item
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player)
+        if (other.TryGetComponent<PlayerController>(out PlayerController player))
+        {
             Effect();
+        }
     }
 
     private void OnEnable()
     {
         if (meshRenderer)
-        { meshRenderer.enabled = true; }
+        {
+            meshRenderer.enabled = true;
+        }
     }
 }

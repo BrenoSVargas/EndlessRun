@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
     [SerializeField] float _jumpForce = 6f;
+    [SerializeField] float _speedToChangeRole = 6f;
 
     [SerializeField] private VoidEventChannelSO _jumpChannelEvent;
     [SerializeField] private FloatEventChannelSO _horizontalChannelEvent;
 
+    private Rigidbody _rigidbody;
 
-    public void Initialize(float jumpForce, VoidEventChannelSO jumpChannelEvent,FloatEventChannelSO horizontalChannelEvent)
+    public void Initialize(float jumpForce, VoidEventChannelSO jumpChannelEvent, FloatEventChannelSO horizontalChannelEvent)
     {
         _jumpChannelEvent = jumpChannelEvent;
         _horizontalChannelEvent = horizontalChannelEvent;
@@ -31,7 +32,7 @@ public class Movement : MonoBehaviour
     }
 
     private void Jump()
-    {        
+    {
         _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
@@ -42,7 +43,8 @@ public class Movement : MonoBehaviour
 
         while (Vector3.Distance(transform.localPosition, new Vector3(xPos, transform.localPosition.y, transform.localPosition.z)) > 0.01f)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(xPos, transform.localPosition.y, transform.localPosition.z), 6f * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(xPos, transform.localPosition.y,
+                transform.localPosition.z), _speedToChangeRole * Time.deltaTime);
 
             yield return null;
         }

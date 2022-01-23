@@ -4,12 +4,15 @@ using UnityEngine;
 
 public sealed class AudioManager : MonoBehaviour
 {
-    private bool isAudioEnable = true;
     [SerializeField] private AudioClip _musicAudio;
-    private AudioSource _audioSource;
 
     [SerializeField] private VoidEventChannelSO _onInitGameChannelEvent = default;
     [SerializeField] private BoolEventChannelSO _onOffAudio = default;
+
+    private AudioSource _audioSource;
+
+    public static bool AudioEnabled { get { return isAudioEnable; } }
+    private static bool isAudioEnable = true;
 
     public void Initialize(AudioClip music, VoidEventChannelSO initEvent, BoolEventChannelSO onOffAudio)
     {

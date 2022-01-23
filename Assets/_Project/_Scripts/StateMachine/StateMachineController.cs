@@ -4,17 +4,24 @@ using TMPro;
 
 public sealed class StateMachineController : MonoBehaviour
 {
-    private static StateMachineController _instance;
-    public static StateMachineController Instance { get { return _instance; } }
+    [HideInInspector] public float StartSpeedGame { get { return _startSpeedGame; } }
+    [HideInInspector] public float MaxSpeedGame { get { return _maxSpeedGame; } }
+    [HideInInspector] public float TimeLimit { get { return _timeLimit; } }
+    [HideInInspector] public float TimeMultiplayerSpeed { get { return _timeMultiplayerSpeed; } }
+    [HideInInspector] public SaveWrapper SaveMain;
 
-    private State _current;
-    public State Current { get { return _current; } }
-    private bool _busy;
+    public bool gameIsRunning;
+    public float SpeedGame = 12f;
 
     [Header("Loading State")]
     public GameObject LoadingScreen;
     public Slider LoadingBar;
     public TMP_Text LoadingText;
+
+    [Header("Events Game")]
+    public VoidEventChannelSO OnInitGameEvent = default;
+    public VoidEventChannelSO OnScoreUpdateEvent = default;
+    public VoidEventChannelSO OnGameIsStarted = default;
 
     [Header("In Game State")]
     [SerializeField] private float _timeLimit = 10f;
@@ -22,28 +29,13 @@ public sealed class StateMachineController : MonoBehaviour
     [SerializeField] private float _timeMultiplayerSpeed = 1.2f;
     [SerializeField] private float _startSpeedGame = 12f;
 
-    public float SpeedGame = 12f;
-    [HideInInspector] public float StartSpeedGame { get { return _startSpeedGame; } }
-    [HideInInspector] public float MaxSpeedGame { get { return _maxSpeedGame; } }
-    [HideInInspector] public float TimeLimit { get { return _timeLimit; } }
-    [HideInInspector] public float TimeMultiplayerSpeed { get { return _timeMultiplayerSpeed; } }
+    private bool _busy;
 
+    private State _current;
+    public State Current { get { return _current; } }
 
-
-
-    [Header("Save System")]
-    public SaveWrapper SaveMain;
-
-
-    [Header("Events Game")]
-    public VoidEventChannelSO OnInitGameEvent = default;
-    public VoidEventChannelSO OnScoreUpdateEvent = default;
-    public VoidEventChannelSO OnGameIsStarted = default;
-
-
-
-    public bool gameIsRunning;
-
+    private static StateMachineController _instance;
+    public static StateMachineController Instance { get { return _instance; } }
 
 
     public void Initialize(float limitOfTime, float maxSpeed, float StartSpeedGame,

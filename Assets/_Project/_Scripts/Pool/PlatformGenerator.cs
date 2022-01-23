@@ -43,8 +43,10 @@ public sealed class PlatformGenerator : PoolManager
     {
         GameObject platformGO = GetRandomItem();
 
-        if (!platformGO) return;
-
+        if (!platformGO)
+        {
+            return;
+        }
         platformGO.SetActive(true);
 
         if (_lastPlatformTransform != null)

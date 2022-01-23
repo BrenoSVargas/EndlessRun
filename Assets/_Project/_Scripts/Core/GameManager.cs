@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private VoidEventChannelSO _deadChannelEvent = default;
+    [SerializeField] private VoidEventChannelSO _isHealthSoldOutChannelEvent = default;
     [SerializeField] private VoidEventChannelSO _gameOverChannelEvent = default;
 
-    public void Initialize(VoidEventChannelSO deadChannelEvent, VoidEventChannelSO gameOverChannelEvent)
+    public void Initialize(VoidEventChannelSO isHealthSoldOutChannelEvent, VoidEventChannelSO gameOverChannelEvent)
     {
-        _deadChannelEvent = deadChannelEvent;
+        _isHealthSoldOutChannelEvent = isHealthSoldOutChannelEvent;
         _gameOverChannelEvent = gameOverChannelEvent;
     }
     private void DeadPlayer()
@@ -20,12 +20,12 @@ public class GameManager : MonoBehaviour
 
     private void EnableEvents()
     {
-        _deadChannelEvent.OnEventRaised += DeadPlayer;
+        _isHealthSoldOutChannelEvent.OnEventRaised += DeadPlayer;
     }
 
     private void DisableEvents()
     {
-        _deadChannelEvent.OnEventRaised -= DeadPlayer;
+        _isHealthSoldOutChannelEvent.OnEventRaised -= DeadPlayer;
 
     }
 

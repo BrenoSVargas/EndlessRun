@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Ranking : MonoBehaviour, ISaveable
 {
-    private int _bestScore;
     [SerializeField] private IntEventChannelSO _bestScoreChannelEvent = default;
+
+    private int _bestScore;
 
     public void Initialize(IntEventChannelSO bestScoreChannel)
     {

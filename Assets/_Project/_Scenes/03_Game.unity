@@ -3742,7 +3742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6290b0fa23e48854bb1d3dcb88046c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deadChannelEvent: {fileID: 11400000, guid: ff771d030701ea24aa23a2c06857c165, type: 2}
+  _isHealthSoldOutChannelEvent: {fileID: 11400000, guid: ff771d030701ea24aa23a2c06857c165, type: 2}
   _gameOverChannelEvent: {fileID: 11400000, guid: f5ac493c51e5ab64590c748f11f9b50c, type: 2}
 --- !u!4 &2057964556
 Transform:

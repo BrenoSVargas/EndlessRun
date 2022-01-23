@@ -8,14 +8,7 @@ using TMPro;
 
 public sealed class UIManager : MonoBehaviour
 {
-    private Button _pauseButton, _returnGameButton, _soundButton, _exitButton, _exitButtonGO;
-    private PanelPositioner _pausePanel, _gameOverPanel;
-
-    private TMP_Text _scoreText, _coinsText;
-    private TMP_Text _scoreGameOverTxt, _bestScoreGameOverTxt;
-    private bool _handleOnOffAudio = true;
-
-    [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
+        [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
     [SerializeField] private VoidEventChannelSO _gameOverChannelEvent = default;
 
     [SerializeField] private IntEventChannelSO _scoreChannelEvent = default;
@@ -23,7 +16,12 @@ public sealed class UIManager : MonoBehaviour
     [SerializeField] private IntEventChannelSO _onIncreasedScoreChannelEvent = default;
     [SerializeField] private BoolEventChannelSO _onOffAudio = default;
 
+    private Button _pauseButton, _returnGameButton, _soundButton, _exitButton, _exitButtonGO;
+    private PanelPositioner _pausePanel, _gameOverPanel;
 
+    private TMP_Text _scoreText, _coinsText;
+    private TMP_Text _scoreGameOverTxt, _bestScoreGameOverTxt;
+    private bool _handleOnOffAudio = true;
 
     public void Initialize(IntEventChannelSO coinsChangedEvent, VoidEventChannelSO gameOverChannelEvent, IntEventChannelSO scoreChannelEvent,
        IntEventChannelSO bestScoreChannelEvent, IntEventChannelSO onIncreasedScoreChannelEvent, BoolEventChannelSO onOffAudio)
@@ -41,6 +39,10 @@ public sealed class UIManager : MonoBehaviour
     {
         SearchComponents();
         AddMethods();
+    }
+    private void Start()
+    {
+        AudioOnOff(AudioManager.AudioEnabled);
     }
     private void GameManager_ShowGameOverUI()
     {

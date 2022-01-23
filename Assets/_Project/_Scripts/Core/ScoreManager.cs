@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour, ISaveable
 {
-    private int _scoreCounter;
-    private int _bestScore;
-    private float _scoreHandleCounter;
-
     public float SmoothScoreCounter = 1f;
 
     [SerializeField] private VoidEventChannelSO _onDeadChannelEvent = default;
@@ -17,6 +13,9 @@ public class ScoreManager : MonoBehaviour, ISaveable
     [SerializeField] private IntEventChannelSO _onIncreasedScoreChannelEvent = default;
     [SerializeField] private IntEventChannelSO _onBestScoreChannelEvent = default;
 
+    private int _scoreCounter;
+    private int _bestScore;
+    private float _scoreHandleCounter;
 
 
     public void Initialize(VoidEventChannelSO onDeadChannelEvent, VoidEventChannelSO onScoreUpdateChannelEvent,
@@ -25,7 +24,7 @@ public class ScoreManager : MonoBehaviour, ISaveable
         _onDeadChannelEvent = onDeadChannelEvent;
         _onScoreUpdateEveryFrameEvent = onScoreUpdateChannelEvent;
         _onScoreChannelEvent = onScoreChannelEvent;
-        _onIncreasedScoreChannelEvent =onIncreasedScoreChannel;
+        _onIncreasedScoreChannelEvent = onIncreasedScoreChannel;
         _onBestScoreChannelEvent = onBestScoreChannel;
 
         SmoothScoreCounter = 1f;

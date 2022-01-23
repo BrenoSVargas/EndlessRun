@@ -22,8 +22,10 @@ public class CoinVFXGenerator : PoolManager
     {
         GameObject effectGO = GetItem();
 
-        if (!effectGO) return;
-
+        if (!effectGO)
+        {
+            return;
+        }
         effectGO.SetActive(true);
         effectGO.transform.position = pos;
 

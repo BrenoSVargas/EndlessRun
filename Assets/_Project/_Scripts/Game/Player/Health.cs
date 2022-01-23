@@ -5,21 +5,24 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private VoidEventChannelSO _isDeadChannelEvent = default;
+    [SerializeField] private VoidEventChannelSO _isHealthSoldOutChannelEvent = default;
 
-    public void Initialize(VoidEventChannelSO isDeadChannel)
+    public void Initialize(VoidEventChannelSO isHealthSoldOutChannelEvent)
     {
-        _isDeadChannelEvent = isDeadChannel;
+        _isHealthSoldOutChannelEvent = isHealthSoldOutChannelEvent;
     }
     private void OnTriggerEnter(Collider other)
     {
         Obstacle obs = other.gameObject.GetComponent<Obstacle>();
-        if (!obs) return;
-        PlayerIsDead();
+        if (!obs)
+        {
+            return;
+        }
+        HealthSoldOut();
     }
 
-    private void PlayerIsDead()
+    private void HealthSoldOut()
     {
-        _isDeadChannelEvent.RaiseEvent();
+        _isHealthSoldOutChannelEvent.RaiseEvent();
     }
 }

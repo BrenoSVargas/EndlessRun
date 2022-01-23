@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlatformRole : MonoBehaviour
 {
     [SerializeField] private int _randomChance = 3;
-    [SerializeField] List<CoinRow> _roles = new List<CoinRow>();
+    [SerializeField] private List<CoinRow> _roles = new List<CoinRow>();
 
     public void Initialize(int randomChance)
     {

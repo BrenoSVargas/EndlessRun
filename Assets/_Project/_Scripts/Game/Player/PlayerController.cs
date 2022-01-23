@@ -9,21 +9,21 @@ public sealed class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float[] _rolePosX = new float[3];
+    [SerializeField] private float _sensibilityTouchInput = 5f;
+    [SerializeField] private LayerMask _groundLayer;
+
+    [SerializeField] private VoidEventChannelSO _onHealthSoldOutChannelEvent;
+    [SerializeField] private VoidEventChannelSO _onJumpChannelEvent;
+    [SerializeField] private FloatEventChannelSO _onHorizontalChannelEvent;
+
     private int index = 1;
     private bool isMoving, isJumping;
     private Health _health;
     private PlayerInputActions _playerInputActions;
     private Movement _movement;
     private CapsuleCollider _collider;
-    [SerializeField] private float _sensibilityTouchInput = 5f;
-    [SerializeField] private LayerMask _groundLayer;
-
-    [SerializeField] private VoidEventChannelSO _onDeadChannelEvent;
-    [SerializeField] private VoidEventChannelSO _onJumpChannelEvent;
-    [SerializeField] private FloatEventChannelSO _onHorizontalChannelEvent;
-
-
-    public void Initialize(float roleLeft, float roleMid, float roleRight, VoidEventChannelSO deadChannel,
+    
+    public void Initialize(float roleLeft, float roleMid, float roleRight, VoidEventChannelSO healthSoldOutChannel,
         VoidEventChannelSO jumpChannel, FloatEventChannelSO horizontalChannel, float sensibilityTouch)
     {
         Awake();
@@ -34,7 +34,7 @@ public sealed class PlayerController : MonoBehaviour
 
         _sensibilityTouchInput = sensibilityTouch;
 
-        _onDeadChannelEvent = deadChannel;
+        _onHealthSoldOutChannelEvent = healthSoldOutChannel;
         _onJumpChannelEvent = jumpChannel;
         _onHorizontalChannelEvent = horizontalChannel;
     }
@@ -150,7 +150,7 @@ public sealed class PlayerController : MonoBehaviour
     }
     private void EnableEvents()
     {
-        _onDeadChannelEvent.OnEventRaised += IsDeadEvent;
+        _onHealthSoldOutChannelEvent.OnEventRaised += IsDeadEvent;
 
     }
 
@@ -165,7 +165,7 @@ public sealed class PlayerController : MonoBehaviour
 
     private void DisableEvents()
     {
-        _onDeadChannelEvent.OnEventRaised -= IsDeadEvent;
+        _onHealthSoldOutChannelEvent.OnEventRaised -= IsDeadEvent;
     }
 
 

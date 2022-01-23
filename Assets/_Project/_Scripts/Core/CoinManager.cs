@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour, ISaveable
 {
-    private int _coinCounter;
     [SerializeField] private IntEventChannelSO _coinsCounterEvent = default;
     [SerializeField] private IntEventChannelSO _coinsChangedEvent = default;
     [SerializeField] private VoidEventChannelSO _initEvent = default;
+    private int _coinCounter;
 
     public void Initialize(IntEventChannelSO coinsCounter, IntEventChannelSO coinsChanged, VoidEventChannelSO initEvent)
     {

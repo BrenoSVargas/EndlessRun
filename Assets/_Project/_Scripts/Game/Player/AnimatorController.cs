@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class AnimatorController : MonoBehaviour
 {
-
-    private Animator _animator;
-
-
     [SerializeField] private VoidEventChannelSO _isDeadChannelEvent;
     [SerializeField] private VoidEventChannelSO _jumpChannelEvent;
+
+    private Animator _animator;
 
     public void Initialize(VoidEventChannelSO isDeadChannel, VoidEventChannelSO jumpChannel)
     {

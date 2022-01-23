@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class SwapSpriteButtton : MonoBehaviour
 {
+    [SerializeField] private Sprite _onAudioSprite, _offAudioSprite;
+
+    [SerializeField] private BoolEventChannelSO _onOffAudio = default;
+
     private enum StateButton
     {
         Off,
@@ -14,10 +18,6 @@ public class SwapSpriteButtton : MonoBehaviour
     private StateButton _current = StateButton.On;
 
     private Image _image;
-
-    [SerializeField] private Sprite _onAudioSprite, _offAudioSprite;
-
-    [SerializeField] private BoolEventChannelSO _onOffAudio = default;
 
     public void Initialize(BoolEventChannelSO onOffAudio)
     {
