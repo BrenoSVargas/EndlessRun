@@ -12,9 +12,9 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] private float _sensibilityTouchInput = 5f;
     [SerializeField] private LayerMask _groundLayer;
 
-    [SerializeField] private VoidEventChannelSO _onHealthSoldOutChannelEvent;
-    [SerializeField] private VoidEventChannelSO _onJumpChannelEvent;
-    [SerializeField] private FloatEventChannelSO _onHorizontalChannelEvent;
+    [SerializeField] private VoidEventChannelSO _onHealthSoldOutChannelEvent = default;
+    [SerializeField] private VoidEventChannelSO _onJumpChannelEvent = default;
+    [SerializeField] private FloatEventChannelSO _onHorizontalChannelEvent = default;
 
     private int index = 1;
     private bool isMoving, isJumping;
@@ -22,6 +22,7 @@ public sealed class PlayerController : MonoBehaviour
     private PlayerInputActions _playerInputActions;
     private Movement _movement;
     private CapsuleCollider _collider;
+    private GameObject _smokeJumpVFX;
     
     public void Initialize(float roleLeft, float roleMid, float roleRight, VoidEventChannelSO healthSoldOutChannel,
         VoidEventChannelSO jumpChannel, FloatEventChannelSO horizontalChannel, float sensibilityTouch)

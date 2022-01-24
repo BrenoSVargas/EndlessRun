@@ -14,4 +14,5 @@ public class PanelPosition
     public Vector3 position;
     public Vector2 anchorMin;
     public Vector2 anchorMax;
+    public float timeInMoving;
 }

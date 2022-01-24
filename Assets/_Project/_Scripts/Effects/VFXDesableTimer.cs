@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class VFXDesableTimer : MonoBehaviour
 {
+    [SerializeField] float _secondsToCheckParticle = 0.3f;
     private ParticleSystem ps;
 
     public void Initialize(){
@@ -42,12 +43,9 @@ public class VFXDesableTimer : MonoBehaviour
             {
                 break;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_secondsToCheckParticle);
         }
 
         ps.gameObject.SetActive(false);
-
-
-
     }
 }

@@ -2786,10 +2786,12 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     anchorMin: {x: 0.5, y: 0.5}
     anchorMax: {x: 0.5, y: 0.5}
+    timeInMoving: 0.4
   - name: 1
     position: {x: 0, y: 2000, z: 0}
     anchorMin: {x: 0.5, y: 0.5}
     anchorMax: {x: 0.5, y: 0.5}
+    timeInMoving: 0.4
 --- !u!1 &1553504881
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,10 +3225,12 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     anchorMin: {x: 0.5, y: 0.5}
     anchorMax: {x: 0.5, y: 0.5}
+    timeInMoving: 0.4
   - name: 1
     position: {x: 0, y: 2000, z: 0}
     anchorMin: {x: 0.5, y: 0.5}
     anchorMax: {x: 0.5, y: 0.5}
+    timeInMoving: 0.4
 --- !u!114 &1660101858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3916,6 +3920,10 @@ PrefabInstance:
     - target: {fileID: 3423536801131632988, guid: 42a719c17273ac647a395bde9382eee4, type: 3}
       propertyPath: m_Name
       value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585796800409656103, guid: 42a719c17273ac647a395bde9382eee4, type: 3}
+      propertyPath: _speedToChangeRole
+      value: 19.69
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a719c17273ac647a395bde9382eee4, type: 3}
